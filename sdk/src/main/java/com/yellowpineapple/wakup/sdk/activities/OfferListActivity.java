@@ -95,6 +95,9 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
             mActionBar = getSupportActionBar();
             mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.wk_primary)));
+            mActionBar.setDisplayShowHomeEnabled(true);
+            mActionBar.setIcon(R.drawable.wk_actionbar_logo_root);
+            //mActionBar.setDisplayHomeAsUpEnabled(true);
 
             gridView.setPadding(gridView.getPaddingLeft(), Math.round(mActionBarHeight), gridView.getPaddingRight(), gridView.getPaddingBottom());
             if (getPullToRefreshLayout() != null) {
