@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
 
     <!-- Base application theme. -->
-    <style name="WakupTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <style name="WakupTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/WakupTheme.ActionBar.Default</item>
         <item name="android:actionMenuTextColor">@color/wk_actionbar_text</item>
         <item name="android:windowBackground">@color/wk_background</item>

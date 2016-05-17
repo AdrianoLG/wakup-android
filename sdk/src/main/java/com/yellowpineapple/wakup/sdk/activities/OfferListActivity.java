@@ -309,7 +309,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
     @Override
     protected void onResume() {
-        getActionBar().show();
+        getSupportActionBar().show();
         toggleNavigationBarVisibility(true, false, null);
         super.onResume();
     }
