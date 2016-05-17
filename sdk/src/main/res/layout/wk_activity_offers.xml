@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OffersActivity">
+    tools:context="com.yellowpineapple.wakup.sdk.activities.OffersActivity">
 
     <com.yellowpineapple.wakup.sdk.views.PullToRefreshLayout
         android:id="@+id/ptr_layout"

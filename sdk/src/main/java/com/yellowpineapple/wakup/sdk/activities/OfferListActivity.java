@@ -1,10 +1,12 @@
 package com.yellowpineapple.wakup.sdk.activities;
 
-import android.app.ActionBar;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.ActionBar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -91,7 +93,8 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
             }
             styledAttributes.recycle();
 
-            mActionBar = getActionBar();
+            mActionBar = getSupportActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.wk_primary)));
 
             gridView.setPadding(gridView.getPaddingLeft(), Math.round(mActionBarHeight), gridView.getPaddingRight(), gridView.getPaddingBottom());
             if (getPullToRefreshLayout() != null) {
