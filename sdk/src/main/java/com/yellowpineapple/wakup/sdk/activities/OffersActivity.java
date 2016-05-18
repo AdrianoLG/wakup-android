@@ -28,7 +28,6 @@ public class OffersActivity extends OfferListActivity {
     PullToRefreshLayout ptrLayout;
     View emptyView;
     boolean alreadyRegistered = false;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
