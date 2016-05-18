@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +52,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
     AtomicInteger scrollPosition = new AtomicInteger(0);
 
-    private StaggeredGridView gridView;
+    private RecyclerView recyclerView;
     ActionBar mActionBar;
     View navigationView;
     View emptyView;
@@ -65,16 +66,16 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
         return !offersLoaded;
     }
 
-    void setupOffersGrid(StaggeredGridView gridView, View emptyView) {
-        setupOffersGrid(gridView, null, emptyView);
+    void setupOffersGrid(RecyclerView recyclerView, View emptyView) {
+        setupOffersGrid(recyclerView, null, emptyView);
     }
 
-    void setupOffersGrid(StaggeredGridView gridView, View navigationView, View emptyView) {
-        this.gridView = gridView;
+    void setupOffersGrid(RecyclerView recyclerView, View navigationView, View emptyView) {
+        this.recyclerView = recyclerView;
         this.emptyView = emptyView;
         this.navigationView = navigationView;
 
-        registerForContextMenu(gridView);
+        registerForContextMenu(recyclerView);
 
         if (getPullToRefreshLayout() != null) {
             setupPullToRefresh(getPullToRefreshLayout());
@@ -90,8 +91,9 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
         offersAdapter.setOffers(offers);
 
-        gridView.setAdapter(offersAdapter);
-        gridView.setOnScrollListener(this);
+        recyclerView.setAdapter(offersAdapter);
+        // TODO Load more on Scroll
+        //recyclerView.setOnScrollListener(this);
     }
 
     public PullToRefreshLayout getPullToRefreshLayout() {
@@ -106,7 +108,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
             }
         });
         pullToRefreshLayout.setColorSchemeResources(R.color.wk_secondary, R.color.wk_primary);
-        pullToRefreshLayout.setSwipeableChildren(gridView, emptyView);
+        pullToRefreshLayout.setSwipeableChildren(recyclerView, emptyView);
     }
 
     protected void reloadOffers() {
@@ -205,7 +207,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
     void setEmptyViewVisible(boolean visible) {
         if (emptyView != null) {
             emptyView.setVisibility(visible ? View.VISIBLE : View.GONE);
-            gridView.setVisibility(visible ? View.GONE : View.VISIBLE);
+            recyclerView.setVisibility(visible ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -281,7 +283,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
     @Override
     public void onOfferLongClick(Offer offer, View view) {
         this.selectedOffer = offer;
-        openContextMenu(gridView);
+        openContextMenu(recyclerView);
     }
 
     abstract void onRequestOffers(final int page, final Location currentLocation);
@@ -324,7 +326,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if (v == gridView) {
+        if (v == recyclerView) {
             if (selectedOffer.hasLocation()) {
                 addMenuItem(menu, OfferMenuItem.VIEW_IN_MAP);
             }

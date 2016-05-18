@@ -3,10 +3,12 @@ package com.yellowpineapple.wakup.sdk.activities;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.GridView;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.yellowpineapple.wakup.sdk.R;
@@ -28,7 +30,7 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
     Toolbar toolbar;
 
     /* Views */
-    StaggeredGridView gridView;
+    RecyclerView gridView;
     PullToRefreshLayout ptrLayout;
     OfferDetailView offerDetailView = null;
 
@@ -45,8 +47,8 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
         if (offerDetailView == null) {
             offerDetailView = new OfferDetailView(this);
             offerDetailView.setListener(this);
-            gridView.addHeaderView(offerDetailView);
-            gridView.addHeaderView(new RelatedOffersHeader(this));
+            //gridView.addHeaderView(offerDetailView);
+            //gridView.addHeaderView(new RelatedOffersHeader(this));
         }
         setSubtitle(offer.getCompany().getName());
         offerDetailView.setOffer(offer, location);
@@ -77,7 +79,7 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
     protected void injectViews() {
         super.injectViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        gridView = (StaggeredGridView) findViewById(R.id.grid_view);
+        gridView = (RecyclerView) findViewById(R.id.grid_view);
         ptrLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
     }
 

@@ -2,11 +2,13 @@ package com.yellowpineapple.wakup.sdk.controllers;
 
 import android.content.Context;
 import android.location.Location;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.models.Offer;
 import com.yellowpineapple.wakup.sdk.views.OfferListView;
 
@@ -16,38 +18,65 @@ import java.util.List;
  * ADAPTER
  */
 
-public class OffersAdapter extends BaseAdapter implements View.OnLongClickListener, View.OnClickListener {
+public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnLongClickListener, View.OnClickListener {
 
     List<Offer> offers;
     boolean loading;
     Context context;
     Location currentLocation;
     Listener listener;
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
 
     public OffersAdapter(final Context context) {
         super();
         this.context = context;
     }
 
-    @Override
-    public int getCount() {
-        int count = 0;
-        if (offers != null) {
-            count = offers.size();
+    public static class OfferViewHolder extends RecyclerView.ViewHolder {
+
+        public OfferListView offerView;
+        public OfferViewHolder(OfferListView v) {
+            super((View) v);
+            offerView = v;
         }
-        if (loading) {
-            count++;
-        }
-        return count;
     }
 
     @Override
-    public Object getItem(int position) {
-        Offer offer = null;
-        if (offers != null && position < offers.size()) {
-            offer = offers.get(position);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        switch (viewType) {
+            case TYPE_HEADER: {
+                // TODO include header
+                return null;
+            }
+            default: {
+                OfferListView offerView = new OfferListView(getContext());
+                offerView.setClickable(true);
+                offerView.setOnClickListener(this);
+                offerView.setLongClickable(true);
+                offerView.setOnLongClickListener(this);
+                // TODO Include listeners
+                OfferViewHolder viewHolder = new OfferViewHolder(offerView);
+                return viewHolder;
+            }
         }
-        return offer;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        switch (getItemViewType(position)) {
+            case TYPE_HEADER: {
+                // TODO Implement
+            }
+            default: {
+                OfferViewHolder offerViewHolder = (OfferViewHolder) holder;
+                // TODO if header is present, increase position
+                Offer offer = offers.get(position);
+                offerViewHolder.offerView.setOffer(offer, currentLocation);
+            }
+        }
     }
 
     @Override
@@ -56,29 +85,16 @@ public class OffersAdapter extends BaseAdapter implements View.OnLongClickListen
     }
 
     @Override
-    public View getView(final int position, View convertView, final ViewGroup parent) {
-        View view;
-        if (!isLoadingView(position)) {
-            final OfferListView offerView;
-            if (convertView == null) {
-                offerView = new OfferListView(getContext());
-                offerView.setClickable(true);
-                offerView.setLongClickable(true);
-                offerView.setOnClickListener(this);
-                offerView.setOnLongClickListener(this);
-            } else {
-                offerView = (OfferListView) convertView;
-            }
-            final Offer offer = offers.get(position);
-            offerView.setOffer(offer, currentLocation);
-            view = offerView;
-        } else {
-            TextView loadingView = new TextView(getContext());
-            loadingView.setText("Loading...");
-            view = loadingView;
+    public int getItemCount() {
+        int count = 0;
+        // TODO Increase in 1 if header is present
+        if (offers != null) {
+            count = offers.size();
         }
-
-        return view;
+        if (loading) {
+            count++;
+        }
+        return count;
     }
 
     boolean isLoadingView(int position) {

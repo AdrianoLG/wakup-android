@@ -3,6 +3,7 @@ package com.yellowpineapple.wakup.sdk.activities;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -20,7 +21,7 @@ public class SavedOffersActivity extends OfferListActivity {
 
     Date lastUpdate;
 
-    StaggeredGridView gridView;
+    RecyclerView gridView;
     PullToRefreshLayout ptrLayout;
     View emptyView;
     Toolbar toolbar;
@@ -37,7 +38,7 @@ public class SavedOffersActivity extends OfferListActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
         emptyView = findViewById(R.id.emptyView);
-        gridView = ((StaggeredGridView) findViewById(R.id.grid_view));
+        gridView = ((RecyclerView) findViewById(R.id.grid_view));
         afterViews();
     }
 

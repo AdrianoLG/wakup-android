@@ -3,6 +3,7 @@ package com.yellowpineapple.wakup.sdk.activities;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.etsy.android.grid.StaggeredGridView;
@@ -24,7 +25,7 @@ public class SearchResultActivity extends OfferListActivity {
     List<Category> categories = null;
 
     /* Views */
-    StaggeredGridView gridView;
+    RecyclerView gridView;
     PullToRefreshLayout ptrLayout;
     View emptyView;
 
@@ -40,7 +41,7 @@ public class SearchResultActivity extends OfferListActivity {
         super.injectViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
-        gridView = ((StaggeredGridView) findViewById(R.id.grid_view));
+        gridView = ((RecyclerView) findViewById(R.id.grid_view));
         emptyView = findViewById(R.id.emptyView);
         afterViews();
     }
@@ -60,7 +61,7 @@ public class SearchResultActivity extends OfferListActivity {
 
     void afterViews() {
         setSubtitle(searchItem.getName());
-        setupOffersGrid(gridView, emptyView);
+        setupOffersGrid(gridView, navigationView, emptyView);
     }
 
     @Override

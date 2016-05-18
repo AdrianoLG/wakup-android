@@ -2,6 +2,8 @@ package com.yellowpineapple.wakup.sdk.models;
 
 import android.content.Context;
 import android.location.Location;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.yellowpineapple.wakup.sdk.R;
 
@@ -14,7 +16,7 @@ import java.util.Date;
 /**
  * Created by agutierrez on 02/02/15.
  */
-public class Offer implements Serializable {
+public class Offer extends RecyclerView.ViewHolder implements Serializable {
 
     int id;
     boolean isOnline;
@@ -28,6 +30,10 @@ public class Offer implements Serializable {
     RemoteImage image;
     RemoteImage thumbnail;
     Store store;
+
+    public Offer(View itemView) {
+        super(itemView);
+    }
 
     public boolean hasLocation() {
         return store != null && store.getLocation() != null;

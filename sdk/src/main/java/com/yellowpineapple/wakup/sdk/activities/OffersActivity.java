@@ -5,6 +5,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,11 +24,11 @@ import java.util.List;
 
 public class OffersActivity extends OfferListActivity {
 
-    StaggeredGridView gridView;
     View navigationView;
     PullToRefreshLayout ptrLayout;
     View emptyView;
     boolean alreadyRegistered = false;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,17 @@ public class OffersActivity extends OfferListActivity {
 
         setContentView(R.layout.wk_activity_offers);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+
+
         injectViews();
     }
 
     protected void injectViews() {
         super.injectViews();
         emptyView = findViewById(R.id.emptyView);
-        gridView = ((StaggeredGridView) findViewById(R.id.grid_view));
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         navigationView = findViewById(R.id.navigationView);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
         final View btnMap = findViewById(R.id.btnMap);
@@ -71,7 +76,7 @@ public class OffersActivity extends OfferListActivity {
     }
 
     void afterViews() {
-        setupOffersGrid(gridView, navigationView, emptyView);
+        setupOffersGrid(recyclerView, navigationView, emptyView);
     }
 
     @Override
