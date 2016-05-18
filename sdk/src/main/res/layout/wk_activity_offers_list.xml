@@ -1,8 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OffersActivity">
+    tools:context="com.yellowpineapple.wakup.sdk.activities.OffersActivity">
+
+    <include layout="@layout/wk_appbar_no_filters" />
 
     <com.yellowpineapple.wakup.sdk.views.PullToRefreshLayout
         android:id="@+id/ptr_layout"
@@ -19,4 +21,4 @@
 
     </com.yellowpineapple.wakup.sdk.views.PullToRefreshLayout>
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

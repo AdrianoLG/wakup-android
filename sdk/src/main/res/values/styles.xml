@@ -2,16 +2,24 @@
 
     <!-- Base application theme. -->
     <style name="WakupTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/wk_primary</item>
+        <item name="colorPrimaryDark">#000</item>
+        <item name="colorAccent">@color/wk_secondary</item>
         <item name="android:actionBarStyle">@style/WakupTheme.ActionBar.Default</item>
         <item name="android:actionMenuTextColor">@color/wk_actionbar_text</item>
         <item name="android:windowBackground">@color/wk_background</item>
         <item name="android:textColor">@color/wk_main_text</item>
         <item name="android:textAppearance">@style/WakupTheme.Text</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="WakupTheme.ActionBarOverlay">
         <item name="android:windowActionBarOverlay">true</item>
     </style>
+
+    <style name="WakupTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+    <style name="WakupTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
 
     <!-- Theme without ActionBar shadow (inherits main theme) -->
     <style name="WakupTheme.Root">

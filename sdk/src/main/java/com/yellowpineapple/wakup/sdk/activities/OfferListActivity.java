@@ -52,7 +52,6 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
     AtomicInteger scrollPosition = new AtomicInteger(0);
 
     private StaggeredGridView gridView;
-    private boolean hideActionBarOnScroll;
     ActionBar mActionBar;
     View navigationView;
     View emptyView;
@@ -66,14 +65,13 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
         return !offersLoaded;
     }
 
-    void setupOffersGrid(StaggeredGridView gridView, View emptyView, final boolean hideActionBarOnScroll) {
-        setupOffersGrid(gridView, null, emptyView, hideActionBarOnScroll);
+    void setupOffersGrid(StaggeredGridView gridView, View emptyView) {
+        setupOffersGrid(gridView, null, emptyView);
     }
 
-    void setupOffersGrid(StaggeredGridView gridView, View navigationView, View emptyView, final boolean hideActionBarOnScroll) {
+    void setupOffersGrid(StaggeredGridView gridView, View navigationView, View emptyView) {
         this.gridView = gridView;
         this.emptyView = emptyView;
-        this.hideActionBarOnScroll = hideActionBarOnScroll;
         this.navigationView = navigationView;
 
         registerForContextMenu(gridView);
@@ -83,29 +81,6 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
         }
 
         if (emptyView != null) emptyView.setVisibility(View.GONE);
-
-        if (hideActionBarOnScroll) {
-            final TypedArray styledAttributes = getTheme().obtainStyledAttributes(new int[] { android.R.attr.actionBarSize });
-            float mActionBarHeight = styledAttributes.getDimension(0, 0);
-            this.actionBarHeight = mActionBarHeight;
-            if (navigationView != null) {
-                mActionBarHeight *= 2;
-            }
-            styledAttributes.recycle();
-
-            mActionBar = getSupportActionBar();
-            mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.wk_primary)));
-            mActionBar.setDisplayShowHomeEnabled(true);
-            mActionBar.setIcon(R.drawable.wk_actionbar_logo_root);
-            //mActionBar.setDisplayHomeAsUpEnabled(true);
-
-            gridView.setPadding(gridView.getPaddingLeft(), Math.round(mActionBarHeight), gridView.getPaddingRight(), gridView.getPaddingBottom());
-            if (getPullToRefreshLayout() != null) {
-                getPullToRefreshLayout().setProgressViewOffset(false,
-                        Math.round(mActionBarHeight - actionBarHeight),
-                        Math.round(mActionBarHeight + getResources().getDimension(R.dimen.wk_pulltorefresh_margin)));
-            }
-        }
 
         offersAdapter = new OffersAdapter(this);
         offersAdapter.setListener(this);
@@ -247,28 +222,6 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
                 onLoadMoreItems();
             }
         }
-        if (hideActionBarOnScroll) {
-            // Only compare left column to avoid ActionBar show/hide jumps
-            if (firstVisibleItem == 0 || (firstVisibleItem - gridView.getHeaderViewsCount()) % 2 == 0) {
-                int compare = new Integer(firstVisibleItem).compareTo(scrollPosition.getAndSet(firstVisibleItem));
-                if (compare > 0) {
-                    if (mActionBar.isShowing()) {
-                        toggleNavigationBarVisibility(false, true, new AnimationListener() {
-                            @Override
-                            public void onAnimationCompleted() {
-                                mActionBar.hide();
-                            }
-                        });
-                    }
-
-                } else if (compare < 0) {
-                    if (!mActionBar.isShowing()) {
-                        mActionBar.show();
-                        delayNavigationToggle(true, true, null);
-                    }
-                }
-            }
-        }
     }
 
     void delayNavigationToggle(final boolean visible, final boolean animated, final AnimationListener listener) {
@@ -315,7 +268,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
     @Override
     protected void onResume() {
-        getSupportActionBar().show();
+        //getSupportActionBar().show();
         toggleNavigationBarVisibility(true, false, null);
         super.onResume();
     }

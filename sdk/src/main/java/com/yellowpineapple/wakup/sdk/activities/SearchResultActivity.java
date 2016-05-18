@@ -36,7 +36,9 @@ public class SearchResultActivity extends OfferListActivity {
         injectViews();
     }
 
-    private void injectViews() {
+    protected void injectViews() {
+        super.injectViews();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
         gridView = ((StaggeredGridView) findViewById(R.id.grid_view));
         emptyView = findViewById(R.id.emptyView);
@@ -58,7 +60,7 @@ public class SearchResultActivity extends OfferListActivity {
 
     void afterViews() {
         setSubtitle(searchItem.getName());
-        setupOffersGrid(gridView, emptyView, true);
+        setupOffersGrid(gridView, emptyView);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.yellowpineapple.wakup.sdk.activities;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
     Offer offer;
     Location location;
     boolean fromStoreOffers = false;
+    Toolbar toolbar;
 
     /* Views */
     StaggeredGridView gridView;
@@ -34,6 +36,9 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wk_activity_offers_list);
+
+        setupToolbar();
+
         injectExtras();
         injectViews();
 
@@ -45,7 +50,13 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
         }
         setSubtitle(offer.getCompany().getName());
         offerDetailView.setOffer(offer, location);
-        setupOffersGrid(gridView, null, true);
+        setupOffersGrid(gridView, null);
+    }
+
+    void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void injectExtras() {
@@ -63,7 +74,9 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
         }
     }
 
-    private void injectViews() {
+    protected void injectViews() {
+        super.injectViews();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         gridView = (StaggeredGridView) findViewById(R.id.grid_view);
         ptrLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
     }

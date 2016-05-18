@@ -8,13 +8,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +65,9 @@ public class SearchActivity extends ParentActivity {
         injectViews();
     }
 
-    private void injectViews() {
+    protected void injectViews() {
+        super.injectViews();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listView = ((ListView) findViewById(R.id.list_view));
         afterViews();
     }
@@ -82,9 +86,7 @@ public class SearchActivity extends ParentActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.wk_search_menu, menu);
 
-        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) searchMenuItem.getActionView();
-
+        searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         setupSearchView(searchView);
 
         return super.onCreateOptionsMenu(menu);

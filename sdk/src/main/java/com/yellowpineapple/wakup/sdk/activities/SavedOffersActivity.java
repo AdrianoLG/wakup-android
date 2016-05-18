@@ -3,6 +3,7 @@ package com.yellowpineapple.wakup.sdk.activities;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.etsy.android.grid.StaggeredGridView;
@@ -22,6 +23,7 @@ public class SavedOffersActivity extends OfferListActivity {
     StaggeredGridView gridView;
     PullToRefreshLayout ptrLayout;
     View emptyView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,9 @@ public class SavedOffersActivity extends OfferListActivity {
         injectViews();
     }
 
-    private void injectViews() {
+    protected void injectViews() {
+        super.injectViews();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
         emptyView = findViewById(R.id.emptyView);
         gridView = ((StaggeredGridView) findViewById(R.id.grid_view));
@@ -38,7 +42,7 @@ public class SavedOffersActivity extends OfferListActivity {
     }
 
     void afterViews() {
-        setupOffersGrid(gridView, null, emptyView, true);
+        setupOffersGrid(gridView, null, emptyView);
     }
 
     @Override

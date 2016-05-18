@@ -13,6 +13,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -38,6 +39,8 @@ public abstract class ParentActivity extends LocationActivity {
 
     RequestClient requestClient = null;
     Wakup wakup = null;
+
+    Toolbar toolbar = null;
 
     private PersistenceHandler persistence;
 
@@ -127,6 +130,18 @@ public abstract class ParentActivity extends LocationActivity {
         if (ab != null) {
             ab.setSubtitle(subtitle);
         }
+    }
+
+    void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
+    protected void injectViews() {
+        setupToolbar();
     }
 
     /* Dialogs */

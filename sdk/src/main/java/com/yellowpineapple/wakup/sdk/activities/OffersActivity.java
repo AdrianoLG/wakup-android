@@ -5,6 +5,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,27 +28,19 @@ public class OffersActivity extends OfferListActivity {
     PullToRefreshLayout ptrLayout;
     View emptyView;
     boolean alreadyRegistered = false;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Retrieve the current set of display options
-            final int displayOptions = actionBar.getDisplayOptions();
-            // Determine which display options are enabled
-            final boolean isHomeAsUpEnabled = (displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0;
-            if (isHomeAsUpEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                actionBar.setHomeAsUpIndicator(R.drawable.wk_actionbar_back_root);
-            }
-        }
 
         setContentView(R.layout.wk_activity_offers);
 
         injectViews();
     }
 
-    void injectViews() {
+    protected void injectViews() {
+        super.injectViews();
         emptyView = findViewById(R.id.emptyView);
         gridView = ((StaggeredGridView) findViewById(R.id.grid_view));
         navigationView = findViewById(R.id.navigationView);
@@ -79,7 +72,7 @@ public class OffersActivity extends OfferListActivity {
     }
 
     void afterViews() {
-        setupOffersGrid(gridView, navigationView, emptyView, true);
+        setupOffersGrid(gridView, navigationView, emptyView);
     }
 
     @Override
