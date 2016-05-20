@@ -2,17 +2,13 @@ package com.yellowpineapple.wakup.sdk.activities;
 
 import android.content.Context;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.etsy.android.grid.StaggeredGridView;
 import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.Wakup;
 import com.yellowpineapple.wakup.sdk.models.Offer;
@@ -35,10 +31,6 @@ public class OffersActivity extends OfferListActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.wk_activity_offers);
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-
 
         injectViews();
     }

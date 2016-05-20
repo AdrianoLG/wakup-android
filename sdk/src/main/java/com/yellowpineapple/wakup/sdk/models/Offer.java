@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Created by agutierrez on 02/02/15.
  */
-public class Offer extends RecyclerView.ViewHolder implements Serializable {
+public class Offer implements Serializable {
 
     int id;
     boolean isOnline;
@@ -30,10 +30,6 @@ public class Offer extends RecyclerView.ViewHolder implements Serializable {
     RemoteImage image;
     RemoteImage thumbnail;
     Store store;
-
-    public Offer(View itemView) {
-        super(itemView);
-    }
 
     public boolean hasLocation() {
         return store != null && store.getLocation() != null;

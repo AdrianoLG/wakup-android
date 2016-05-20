@@ -10,11 +10,9 @@ import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -87,7 +85,7 @@ public class SearchActivity extends ParentActivity {
         menuInflater.inflate(R.menu.wk_search_menu, menu);
 
         searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
-        setupSearchView(searchView);
+         setupSearchView(searchView);
 
         return super.onCreateOptionsMenu(menu);
     }

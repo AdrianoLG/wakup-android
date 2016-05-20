@@ -4,9 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
-import com.etsy.android.grid.StaggeredGridView;
 import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.models.Offer;
 import com.yellowpineapple.wakup.sdk.utils.IntentBuilder;
@@ -53,7 +51,7 @@ public class StoreOffersActivity extends OfferListActivity {
 
     void afterViews() {
         setSubtitle(offer.getCompany().getName());
-        setupOffersGrid(gridView, null);
+        setupOffersGrid(gridView);
     }
 
     @Override

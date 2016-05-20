@@ -8,16 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.GridView;
 
-import com.etsy.android.grid.StaggeredGridView;
 import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.models.Offer;
 import com.yellowpineapple.wakup.sdk.utils.IntentBuilder;
 import com.yellowpineapple.wakup.sdk.utils.PersistenceHandler;
 import com.yellowpineapple.wakup.sdk.views.OfferDetailView;
 import com.yellowpineapple.wakup.sdk.views.PullToRefreshLayout;
-import com.yellowpineapple.wakup.sdk.views.RelatedOffersHeader;
 
 public class OfferDetailActivity extends OfferListActivity implements OfferDetailView.Listener {
 
@@ -30,7 +27,7 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
     Toolbar toolbar;
 
     /* Views */
-    RecyclerView gridView;
+    RecyclerView recyclerView;
     PullToRefreshLayout ptrLayout;
     OfferDetailView offerDetailView = null;
 
@@ -47,12 +44,12 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
         if (offerDetailView == null) {
             offerDetailView = new OfferDetailView(this);
             offerDetailView.setListener(this);
-            //gridView.addHeaderView(offerDetailView);
-            //gridView.addHeaderView(new RelatedOffersHeader(this));
+            //recyclerView.addHeaderView(headerView);
+            //recyclerView.addHeaderView(new RelatedOffersHeader(this));
         }
         setSubtitle(offer.getCompany().getName());
         offerDetailView.setOffer(offer, location);
-        setupOffersGrid(gridView, null);
+        setupOffersGrid(offerDetailView, recyclerView, null, null);
     }
 
     void setupToolbar() {
@@ -79,7 +76,7 @@ public class OfferDetailActivity extends OfferListActivity implements OfferDetai
     protected void injectViews() {
         super.injectViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        gridView = (RecyclerView) findViewById(R.id.grid_view);
+        recyclerView = (RecyclerView) findViewById(R.id.grid_view);
         ptrLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
     }
 

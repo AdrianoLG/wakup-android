@@ -1,13 +1,12 @@
 package com.yellowpineapple.wakup.sdk.activities;
 
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Rect;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,13 +16,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
-import com.etsy.android.grid.StaggeredGridView;
 import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.communications.Request;
 import com.yellowpineapple.wakup.sdk.communications.requests.BaseRequest;
 import com.yellowpineapple.wakup.sdk.communications.requests.OfferListRequestListener;
 import com.yellowpineapple.wakup.sdk.controllers.OffersAdapter;
 import com.yellowpineapple.wakup.sdk.models.Offer;
+import com.yellowpineapple.wakup.sdk.views.OfferDetailView;
 import com.yellowpineapple.wakup.sdk.views.PullToRefreshLayout;
 
 import java.util.ArrayList;
@@ -50,13 +49,10 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
     static int FIRST_PAGE = BaseRequest.FIRST_PAGE;
     static int PER_PAGE = BaseRequest.RESULTS_PER_PAGE;
 
-    AtomicInteger scrollPosition = new AtomicInteger(0);
-
     private RecyclerView recyclerView;
-    ActionBar mActionBar;
     View navigationView;
     View emptyView;
-    float actionBarHeight;
+    StaggeredGridLayoutManager staggeredGridLayoutManager;
 
     interface AnimationListener {
         void onAnimationCompleted();
@@ -66,11 +62,15 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
         return !offersLoaded;
     }
 
-    void setupOffersGrid(RecyclerView recyclerView, View emptyView) {
-        setupOffersGrid(recyclerView, null, emptyView);
+    void setupOffersGrid(RecyclerView recyclerView) {
+        setupOffersGrid(recyclerView, null, null);
     }
 
     void setupOffersGrid(RecyclerView recyclerView, View navigationView, View emptyView) {
+        setupOffersGrid(null, recyclerView, navigationView, emptyView);
+    }
+
+    void setupOffersGrid(View headerView, RecyclerView recyclerView, View navigationView, View emptyView) {
         this.recyclerView = recyclerView;
         this.emptyView = emptyView;
         this.navigationView = navigationView;
@@ -83,7 +83,7 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
         if (emptyView != null) emptyView.setVisibility(View.GONE);
 
-        offersAdapter = new OffersAdapter(this);
+        offersAdapter = new OffersAdapter(headerView, this);
         offersAdapter.setListener(this);
 
         // do we have saved data?
@@ -91,9 +91,66 @@ public abstract class OfferListActivity extends ParentActivity implements AbsLis
 
         offersAdapter.setOffers(offers);
 
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+
+        recyclerView.addItemDecoration(new SpaceItemDecoration(headerView != null , 10));
         recyclerView.setAdapter(offersAdapter);
         // TODO Load more on Scroll
         //recyclerView.setOnScrollListener(this);
+    }
+
+    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+        boolean hasHeader;
+
+        public SpaceItemDecoration(boolean hasHeader, int space) {
+            this.space = space;
+            this.hasHeader = hasHeader;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view);
+
+            StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+            int spanIndex = lp.getSpanIndex();
+
+            if(hasHeader) {
+                if(position == 0) {
+                    ((StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams()).setFullSpan(true);
+                    outRect.top = space * 2;
+                    outRect.left = space * 2;
+                    outRect.right = space * 2;
+                } else {
+                    ((StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams()).setFullSpan(false);
+                    if (spanIndex == 1) {
+                        outRect.left = space;
+                        outRect.right = space * 2;
+                    } else {
+                        outRect.left = space * 2;
+                        outRect.right = space;
+                    }
+                }
+                outRect.bottom = space * 2;
+            } else {
+                if(position == 0 || position == 1) {
+                    outRect.top = space * 2;
+                }
+                if (position >= 0) {
+                    if (spanIndex == 1) {
+                        outRect.left = space;
+                        outRect.right = space * 2;
+                    } else {
+                        outRect.left = space * 2;
+                        outRect.right = space;
+                    }
+
+                    outRect.bottom = space * 2;
+                }
+            }
+        }
     }
 
     public PullToRefreshLayout getPullToRefreshLayout() {

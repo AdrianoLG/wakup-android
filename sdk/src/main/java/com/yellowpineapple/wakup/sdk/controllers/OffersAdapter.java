@@ -3,13 +3,12 @@ package com.yellowpineapple.wakup.sdk.controllers;
 import android.content.Context;
 import android.location.Location;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.models.Offer;
+import com.yellowpineapple.wakup.sdk.views.OfferDetailView;
 import com.yellowpineapple.wakup.sdk.views.OfferListView;
 
 import java.util.List;
@@ -25,76 +24,87 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     Context context;
     Location currentLocation;
     Listener listener;
+    View headerView;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
-    public OffersAdapter(final Context context) {
+    public OffersAdapter(View headerView, final Context context) {
         super();
+        this.headerView = headerView;
         this.context = context;
-    }
-
-    public static class OfferViewHolder extends RecyclerView.ViewHolder {
-
-        public OfferListView offerView;
-        public OfferViewHolder(OfferListView v) {
-            super((View) v);
-            offerView = v;
-        }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         switch (viewType) {
-            case TYPE_HEADER: {
-                // TODO include header
-                return null;
-            }
-            default: {
+            case TYPE_HEADER:
+                HeaderViewHolder headerViewHolder = new HeaderViewHolder(headerView);
+                return headerViewHolder;
+            default:
                 OfferListView offerView = new OfferListView(getContext());
                 offerView.setClickable(true);
                 offerView.setOnClickListener(this);
                 offerView.setLongClickable(true);
                 offerView.setOnLongClickListener(this);
-                // TODO Include listeners
                 OfferViewHolder viewHolder = new OfferViewHolder(offerView);
                 return viewHolder;
-            }
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return isHeaderPresent() && position == 0 ? TYPE_HEADER : TYPE_ITEM;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        switch (getItemViewType(position)) {
-            case TYPE_HEADER: {
-                // TODO Implement
-            }
-            default: {
-                OfferViewHolder offerViewHolder = (OfferViewHolder) holder;
-                // TODO if header is present, increase position
-                Offer offer = offers.get(position);
-                offerViewHolder.offerView.setOffer(offer, currentLocation);
-            }
+        if(getItemViewType(position) != TYPE_HEADER) {
+            OfferViewHolder offerViewHolder = (OfferViewHolder) holder;
+            offerViewHolder.offerView.setOffer(getOffer(position), currentLocation);
         }
+
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
+    Offer getOffer(int position) {
+        return offers.get(isHeaderPresent() ? position - 1 : position);
     }
 
     @Override
     public int getItemCount() {
         int count = 0;
-        // TODO Increase in 1 if header is present
         if (offers != null) {
             count = offers.size();
         }
+        if (isHeaderPresent()) {
+            count++;
+        }
+
         if (loading) {
             count++;
         }
         return count;
+    }
+
+    boolean isHeaderPresent() {
+        return headerView != null;
+    }
+
+    public static class OfferViewHolder extends RecyclerView.ViewHolder {
+
+        public OfferListView offerView;
+        public OfferViewHolder(View v) {
+            super(v);
+            offerView = (OfferListView) v;
+        }
+    }
+
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+        public HeaderViewHolder(View v) {
+            super(v);
+        }
     }
 
     boolean isLoadingView(int position) {
