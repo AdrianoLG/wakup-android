@@ -79,7 +79,7 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
         this.emptyView = emptyView;
         this.navigationView = navigationView;
 
-        //registerForContextMenu(recyclerView);
+        registerForContextMenu(recyclerView);
 
         if (getPullToRefreshLayout() != null) {
             setupPullToRefresh(getPullToRefreshLayout());
