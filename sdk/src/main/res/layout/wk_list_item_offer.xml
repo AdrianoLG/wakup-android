@@ -2,15 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wk_ripple_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/wk_ripple_effect">
+    android:layout_height="match_parent">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/wk_offer_list_view_bg"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -139,5 +140,13 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/rippleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground" >
+    </View>
 </FrameLayout>
 

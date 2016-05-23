@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -100,7 +101,6 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
 
         recyclerView.addItemDecoration(new SpaceItemDecoration(headerView != null , 10));
         recyclerView.setAdapter(offersAdapter);
-        // TODO Load more on Scroll
 
         recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(staggeredGridLayoutManager) {
             @Override
@@ -335,14 +335,14 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
     }
 
     @Override
-    public void onOfferClick(Offer offer, View view) {
+    public void onOfferClick(Offer offer) {
         showOfferDetail(offer, currentLocation);
     }
 
     @Override
-    public void onOfferLongClick(Offer offer, View view) {
+    public void onOfferLongClick(Offer offer) {
         this.selectedOffer = offer;
-        openContextMenu(recyclerView);
+        //openContextMenu(recyclerView);
     }
 
     abstract void onRequestOffers(final int page, final Location currentLocation);
@@ -384,7 +384,9 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
+
+        Log.d("HEEEEEEYA", v.toString());
+
         if (v == recyclerView) {
             if (selectedOffer.hasLocation()) {
                 addMenuItem(menu, OfferMenuItem.VIEW_IN_MAP);

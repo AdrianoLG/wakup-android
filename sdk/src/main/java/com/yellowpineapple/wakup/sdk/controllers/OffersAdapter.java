@@ -4,10 +4,12 @@ import android.content.Context;
 import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.yellowpineapple.wakup.sdk.R;
 import com.yellowpineapple.wakup.sdk.models.Offer;
 import com.yellowpineapple.wakup.sdk.views.OfferDetailView;
 import com.yellowpineapple.wakup.sdk.views.OfferListView;
@@ -18,7 +20,7 @@ import java.util.List;
  * ADAPTER
  */
 
-public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnLongClickListener, View.OnClickListener {
+public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OfferListView.Listener {
 
     List<Offer> offers;
     boolean loading;
@@ -44,10 +46,7 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 return headerViewHolder;
             default:
                 OfferListView offerView = new OfferListView(getContext());
-                offerView.setClickable(true);
-                offerView.setOnClickListener(this);
-                offerView.setLongClickable(true);
-                offerView.setOnLongClickListener(this);
+                offerView.setListener(this);
                 OfferViewHolder viewHolder = new OfferViewHolder(offerView);
                 return viewHolder;
         }
@@ -114,26 +113,18 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onClick(View v) {
-        if (v instanceof OfferListView) {
-            OfferListView offerView = (OfferListView) v;
-            if (listener != null) listener.onOfferClick(offerView.getOffer(), offerView);
-        }
+    public void onClick(Offer offer) {
+        if (listener != null) listener.onOfferClick(offer);
     }
 
     @Override
-    public boolean onLongClick(View v) {
-        if (v instanceof OfferListView) {
-            OfferListView offerView = (OfferListView) v;
-            if (listener != null) listener.onOfferLongClick(offerView.getOffer(), offerView);
-            return true;
-        }
-        return false;
+    public void onLongClick(Offer offer) {
+        if (listener != null) listener.onOfferLongClick(offer);
     }
 
     public interface Listener {
-        void onOfferClick(Offer offer, View view);
-        void onOfferLongClick(Offer offer, View view);
+        void onOfferClick(Offer offer);
+        void onOfferLongClick(Offer offer);
     }
 
     public Listener getListener() {
