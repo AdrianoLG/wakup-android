@@ -40,7 +40,7 @@ public class SearchResultActivity extends OfferListActivity {
         super.injectViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
-        gridView = ((RecyclerView) findViewById(R.id.grid_view));
+        gridView = ((RecyclerView) findViewById(R.id.recycler_view));
         emptyView = findViewById(R.id.emptyView);
         afterViews();
     }

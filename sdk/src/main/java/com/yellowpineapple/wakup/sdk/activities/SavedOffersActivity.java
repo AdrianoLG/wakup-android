@@ -20,7 +20,7 @@ public class SavedOffersActivity extends OfferListActivity {
 
     Date lastUpdate;
 
-    RecyclerView gridView;
+    RecyclerView recyclerView;
     PullToRefreshLayout ptrLayout;
     View emptyView;
     Toolbar toolbar;
@@ -37,12 +37,12 @@ public class SavedOffersActivity extends OfferListActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrLayout = ((PullToRefreshLayout) findViewById(R.id.ptr_layout));
         emptyView = findViewById(R.id.emptyView);
-        gridView = ((RecyclerView) findViewById(R.id.grid_view));
+        recyclerView = ((RecyclerView) findViewById(R.id.recycler_view));
         afterViews();
     }
 
     void afterViews() {
-        setupOffersGrid(gridView, null, emptyView);
+        setupOffersGrid(recyclerView, null, emptyView);
     }
 
     @Override
