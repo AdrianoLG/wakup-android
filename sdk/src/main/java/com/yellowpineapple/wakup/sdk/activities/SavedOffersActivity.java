@@ -4,7 +4,6 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.yellowpineapple.wakup.sdk.R;
@@ -23,7 +22,6 @@ public class SavedOffersActivity extends OfferListActivity {
     RecyclerView recyclerView;
     PullToRefreshLayout ptrLayout;
     View emptyView;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

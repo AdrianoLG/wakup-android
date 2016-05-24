@@ -149,8 +149,8 @@ If a more thorough customization is required, you can also override the secondar
 
 Following are described the different views of the application that can be customized, including the associated resources:
 
-#### Action bar
-Wakup Activities uses two different customizable Action bars:
+#### App bar
+Wakup Activities uses two different customizable Appbars:
 
 - The first ActionBar is used for the main (or root) activity
   
@@ -339,7 +339,6 @@ To change the default circle background, it would be required to override the de
 
 The following dependencies are used in the project:
 
-* [AndroidStaggeredGrid](https://github.com/etsy/AndroidStaggeredGrid): Multiple height grid view
 * [Async Http](http://loopj.com/android-async-http/): Library for asynchronous requests
 * [Gson](http://code.google.com/p/google-gson/): Parse and serialize JSON
 * [Calligraphy](https://github.com/chrisjenx/Calligraphy): Allows setting custom typeface to Text Views

@@ -136,7 +136,6 @@ public abstract class ParentActivity extends LocationActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
 

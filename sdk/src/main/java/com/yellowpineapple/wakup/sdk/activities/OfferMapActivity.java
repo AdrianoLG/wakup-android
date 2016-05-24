@@ -135,7 +135,6 @@ public class OfferMapActivity
 
         });
 
-        setupToolbar();
     }
 
     private void displayInMap(List<Offer> offers) {
