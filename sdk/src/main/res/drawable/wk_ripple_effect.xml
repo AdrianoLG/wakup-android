@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#aaa">
-    <item android:id="@android:id/mask">
-        <shape android:shape="rectangle">
-            <solid android:color="#000000" />
-            <corners android:bottomLeftRadius="5dp"
-                android:bottomRightRadius="5dp"/>
-        </shape>
-    </item>
-</ripple>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/wk_translucent" android:state_pressed="true"/>
+    <item android:drawable="@color/wk_translucent" android:state_focused="true"/>
+    <item android:drawable="@color/wk_transparent"/>
+</selector>

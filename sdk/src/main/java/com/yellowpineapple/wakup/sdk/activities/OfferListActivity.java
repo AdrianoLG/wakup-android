@@ -4,20 +4,16 @@ import android.graphics.Rect;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AbsListView;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.yellowpineapple.wakup.sdk.R;
@@ -26,12 +22,10 @@ import com.yellowpineapple.wakup.sdk.communications.requests.BaseRequest;
 import com.yellowpineapple.wakup.sdk.communications.requests.OfferListRequestListener;
 import com.yellowpineapple.wakup.sdk.controllers.OffersAdapter;
 import com.yellowpineapple.wakup.sdk.models.Offer;
-import com.yellowpineapple.wakup.sdk.views.OfferDetailView;
 import com.yellowpineapple.wakup.sdk.views.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by agutierrez on 09/02/15.
@@ -99,7 +93,8 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
 
-        recyclerView.addItemDecoration(new SpaceItemDecoration(headerView != null , 10));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(headerView != null ,
+                getResources().getDimensionPixelSize(R.dimen.wk_card_gap)));
         recyclerView.setAdapter(offersAdapter);
 
         recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(staggeredGridLayoutManager) {
@@ -218,14 +213,16 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
     @Override
     public void setLoading(boolean loading) {
         if (getPullToRefreshLayout() != null) {
-            if (loading) {
+            getPullToRefreshLayout().setRefreshing(loading);
+            /*if (loading) {
                 if (!getPullToRefreshLayout().isRefreshing()) {
-                    setProgressBarIndeterminateVisibility(true);
+                    //setProgressBarIndeterminateVisibility(true);
+                    getPullToRefreshLayout().setRefreshing(true);
                 }
             } else {
                 setProgressBarIndeterminateVisibility(false);
                 getPullToRefreshLayout().setRefreshing(false);
-            }
+            }*/
         } else {
             super.setLoading(loading);
         }
@@ -384,8 +381,6 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-        Log.d("HEEEEEEYA", v.toString());
 
         if (v == recyclerView) {
             if (selectedOffer.hasLocation()) {

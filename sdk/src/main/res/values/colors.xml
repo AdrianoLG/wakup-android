@@ -2,6 +2,7 @@
 <resources>
     <color name="wk_white">#FFF</color>
     <color name="wk_transparent">#0000</color>
+    <color name="wk_translucent">#1000</color>
 
     <color name="wk_dark_pressed_layer">#1A000000</color>
     <color name="wk_light_pressed_layer">#33FFFFFF</color>
