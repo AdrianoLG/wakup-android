@@ -205,6 +205,14 @@ It is possible to customize the colors of the App bar...
     
 ```
 
+To hide title, either on `wk_appbar.xml` or `wk_appbar_no_filters`, use:
+
+```xml
+    <android.support.v7.widget.Toolbar
+        app:title="."
+        app:titleTextColor="@color/wk_transparent"
+```
+
 ![](http://i.imgur.com/72p2G1r.png)
 
 ![](http://i.imgur.com/SVAkmXK.png)
@@ -213,7 +221,7 @@ It is possible to customize the colors of the App bar...
 
 `wk_appbar.xml` includes filter's bar with its own styles
 
-![](http://i.imgur.com/0ET1ljz.png)
+![](http://i.imgur.com/jh6Sz22.png)
 
 ```xml
 <!-- Colors -->

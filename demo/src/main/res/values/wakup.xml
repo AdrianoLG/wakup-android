@@ -11,13 +11,13 @@
     <!-- <drawable name="wk_nav_big_offer">@drawable/wk_ic_expiration</drawable> -->
 
 
-    <!--<color name="wk_appbar_text">#00F</color>
+    <!-- <color name="wk_appbar_text">#FAB</color>
     <color name="wk_appbar_bg">#F0F</color>
     <color name="wk_navbar_bg">#BB0</color>
     <color name="wk_navbar_text">#B9F</color>
     <color name="wk_navbar_divider">#2F4</color>
     <color name="wk_navbar_pressed">#5AF</color>
-    <color name="wk_action_active">#F5A</color>-->
+    <color name="wk_action_active">#F5A</color> -->
 
     <!--&lt;!&ndash; Activity titles &ndash;&gt;
     <string name="wk_activity_offers">Offers</string>
