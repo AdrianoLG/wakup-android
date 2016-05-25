@@ -4,7 +4,7 @@
     android:id="@+id/navigationView"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/wk_primary"
+    android:background="@color/wk_navbar_bg"
     app:layout_scrollFlags="scroll|enterAlways">
 
     <LinearLayout

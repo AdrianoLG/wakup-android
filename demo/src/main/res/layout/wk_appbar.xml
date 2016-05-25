@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/wk_actionbar_bg"
+        android:background="@color/wk_appbar_bg"
         app:popupTheme="@style/WakupTheme.PopupOverlay"
         app:theme="@style/WakupTheme.AppBarOverlay"
         app:layout_scrollFlags="scroll|enterAlways">

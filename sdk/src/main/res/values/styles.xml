@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="WakupTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/wk_primary</item>
-        <item name="colorPrimaryDark">#000</item>
+        <item name="colorPrimaryDark">@color/wk_primary_dark</item>
         <item name="colorAccent">@color/wk_secondary</item>
         <item name="android:actionBarStyle">@style/WakupTheme.ActionBar.Default</item>
-        <item name="android:actionMenuTextColor">@color/wk_actionbar_text</item>
+        <item name="android:actionMenuTextColor">@color/wk_appbar_text</item>
         <item name="android:windowBackground">@color/wk_background</item>
         <item name="android:textColor">@color/wk_main_text</item>
         <item name="android:textAppearance">@style/WakupTheme.Text</item>
@@ -18,7 +18,10 @@
         <item name="android:windowActionBarOverlay">true</item>
     </style>
 
-    <style name="WakupTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+    <style name="WakupTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/wk_appbar_text</item>
+        <item name="android:background">@color/wk_appbar_bg</item>
+    </style>
     <style name="WakupTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
 
     <!-- Theme without ActionBar shadow (inherits main theme) -->
@@ -50,7 +53,7 @@
 
     <!-- ActionBar styles -->
     <style name="WakupTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/wk_actionbar_bg</item>
+        <item name="android:background">@color/wk_appbar_bg</item>
         <item name="android:titleTextStyle">@style/WakupTheme.ActionBar.Title</item>
         <!-- <item name="android:subtitleTextStyle">@style/WakupTheme.ActionBar.Subtitle</item> -->
         <item name="android:logo">@drawable/wk_actionbar_logo</item>
@@ -68,7 +71,7 @@
     <!-- ActionBar title text -->
     <style name="WakupTheme.ActionBar.Title"
         parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/wk_actionbar_text</item>
+        <item name="android:textColor">@color/wk_appbar_text</item>
     </style>
 
     <!-- <style name="WakupTheme.ActionBar.Subtitle"

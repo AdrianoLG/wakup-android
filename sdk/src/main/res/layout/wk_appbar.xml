@@ -13,7 +13,7 @@
         android:background="@color/wk_primary"
         app:popupTheme="@style/WakupTheme.PopupOverlay"
         app:theme="@style/WakupTheme.AppBarOverlay"
-        app:layout_scrollFlags="scroll|enterAlways"/>
+        app:layout_scrollFlags="scroll|enterAlways" />
 
     <include layout="@layout/wk_filters_appbar"></include>
 

@@ -211,12 +211,18 @@ public abstract class OfferListActivity extends ParentActivity implements Offers
     }
 
     @Override
-    public void setLoading(boolean loading) {
+    public void setLoading(final boolean loading) {
         if (getPullToRefreshLayout() != null) {
-            getPullToRefreshLayout().setRefreshing(loading);
+            //getPullToRefreshLayout().setRefreshing(loading);
+            getPullToRefreshLayout().post(new Runnable() {
+                @Override
+                public void run() {
+                    getPullToRefreshLayout().setRefreshing(loading);
+                }
+            });
             /*if (loading) {
                 if (!getPullToRefreshLayout().isRefreshing()) {
-                    //setProgressBarIndeterminateVisibility(true);
+                    setProgressBarIndeterminateVisibility(true);
                     getPullToRefreshLayout().setRefreshing(true);
                 }
             } else {

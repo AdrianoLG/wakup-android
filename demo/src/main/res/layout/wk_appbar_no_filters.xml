@@ -16,13 +16,21 @@
         app:theme="@style/WakupTheme.AppBarOverlay"
         app:layout_scrollFlags="scroll|enterAlways">
 
-        <!--<ImageView
+        <ProgressBar
+            android:id="@+id/progress_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:indeterminate="true"
+            android:visibility="gone"/>
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_toolbar_logo"/>-->
+            android:src="@drawable/ic_toolbar_logo"/>
 
     </android.support.v7.widget.Toolbar>
 
