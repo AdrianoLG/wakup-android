@@ -205,17 +205,11 @@ It is possible to customize the colors of the App bar...
     
 ```
 
-To hide title, either on `wk_appbar.xml` or `wk_appbar_no_filters`, use:
-
-```xml
-    <android.support.v7.widget.Toolbar
-        app:title="."
-        app:titleTextColor="@color/wk_transparent"
-```
+To hide title, either on `wk_appbar.xml` or `wk_appbar_no_filters`, use empty Strings in the [activity titles](#strings)</a>.
 
 ![](http://i.imgur.com/72p2G1r.png)
 
-![](http://i.imgur.com/SVAkmXK.png)
+![](http://i.imgur.com/VO0GI1D.png)
 
 #### Navigation bar
 
