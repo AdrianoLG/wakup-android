@@ -19,8 +19,6 @@
     <color name="wk_navbar_pressed">#5AF</color>
     <color name="wk_action_active">#F5A</color> -->
 
-    <string name="wk_activity_map"></string>
-
     <!--&lt;!&ndash; Activity titles &ndash;&gt;
     <string name="wk_activity_offers">Offers</string>
     <string name="wk_activity_my_offers">My offers</string>
