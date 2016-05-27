@@ -10,6 +10,7 @@
     app:theme="@style/WakupTheme.AppBarOverlay"
     app:layout_scrollFlags="scroll|enterAlways">
 
+    <!-- ProgressBar shown on wk_appbar.xml while loading -->
     <ProgressBar
         android:id="@+id/progress_spinner"
         android:layout_width="match_parent"
@@ -17,5 +18,14 @@
         android:layout_gravity="end"
         android:indeterminate="true"
         android:visibility="gone" />
+
+    <!-- ImageView with logo centered -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/wk_actionbar_logo"/>
 
 </android.support.v7.widget.Toolbar>
